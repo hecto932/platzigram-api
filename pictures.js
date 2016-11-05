@@ -2,11 +2,25 @@
 
 import { send } from 'micro'
 import HttpHash from 'http-hash'
+import Db from 'platzigram-db'
+import config from './config'
+import DbStub from './test/stub/db'
+
+const env = process.env.NODE_ENV || 'production'
+let db = new Db(config.db)
+
+if (env === 'test') {
+  db = new DbStub()
+}
 
 const hash = HttpHash()
 
 hash.set('GET /:id', async function getPicture (req, res, params) {
-  send(res, 200, params)
+  let id = params.id
+  await db.connect()
+  let image = await db.getImage(id)
+  await db.disconnect()
+  send(res, 200, image)
 })
 
 export default async function main (req, res) {
