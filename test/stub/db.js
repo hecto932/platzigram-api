@@ -27,10 +27,10 @@ export default class Db {
   }
 
   getImages () {
-    return Promise.resolve([
-      fixtures.getImage(),
-      fixtures.getImage(),
-      fixtures.getImage()
-    ])
+    return Promise.resolve(fixtures.getImages())
+  }
+
+  getImagesByTag (tag) {
+    return Promise.resolve(fixtures.getImagesByTag())
   }
 }
