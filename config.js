@@ -1,3 +1,4 @@
 export default {
-  db: {}
+  db: {},
+  secret: process.env.PLATZIGRAM_SECRET || 'platzi' // OJO - no usar defaults
 }
