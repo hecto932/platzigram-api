@@ -40,6 +40,7 @@ test('POST /', async t => {
   t.is(response.statusCode, 201)
   t.deepEqual(response.body, image)
 })
+
 test('POST /:id/like', async t => {
   let image = fixtures.getImage()
   let url = t.context.url
@@ -56,4 +57,19 @@ test('POST /:id/like', async t => {
   imageNew.likes = 1
 
   t.deepEqual(body, imageNew)
+})
+
+test('GET /list', async t => {
+  let images = fixtures.getImages()
+  let url = t.context.url
+
+  let options = {
+    method: 'GET',
+    uri: `${url}/list`,
+    json: true
+  }
+
+  let body = await request(options)
+
+  t.deepEqual(body, images)
 })
