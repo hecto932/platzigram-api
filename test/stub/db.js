@@ -38,7 +38,7 @@ export default class Db {
     return Promise.resolve(fixtures.getUser())
   }
 
-  getUser () {
+  getUser (username) {
     return Promise.resolve(fixtures.getUser())
   }
 
